@@ -1,0 +1,8 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>retry_example_error_502_and_504_retry_policy_dot_net_standard_2</RootNamespace>
+  </PropertyGroup>
+
+</Project>

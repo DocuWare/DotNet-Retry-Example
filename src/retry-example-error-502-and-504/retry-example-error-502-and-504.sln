@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35707.178
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "retry-example-error-502-and-504-dot-net8", "retry-example-error-502-and-504-dot-net8\retry-example-error-502-and-504-dot-net8.csproj", "{EF6319E5-4CA8-484B-BA76-24BFD0AFFFE0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "retry-example-error-502-and-504-dot-net-framework-472", "retry-example-error-502-and-504-dot-net-framework-472\retry-example-error-502-and-504-dot-net-framework-472.csproj", "{F21C230E-4732-4421-8A79-CFBFED9A666B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "retry-example-error-502-and-504-retry-policy-dot-net-standard-2", "retry-example-error-502-and-504-retry-policy-dot-net-standard-2\retry-example-error-502-and-504-retry-policy-dot-net-standard-2.csproj", "{C4130A10-85E0-4FC0-983F-AAC1D8B3AA19}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "retry-example-error-502-and-504-tests-dot-net8", "retry-example-error-502-and-504-tests-dot-net8\retry-example-error-502-and-504-tests-dot-net8.csproj", "{5A8605DF-882E-43AE-98B3-AF0F350617A4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EF6319E5-4CA8-484B-BA76-24BFD0AFFFE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF6319E5-4CA8-484B-BA76-24BFD0AFFFE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF6319E5-4CA8-484B-BA76-24BFD0AFFFE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF6319E5-4CA8-484B-BA76-24BFD0AFFFE0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F21C230E-4732-4421-8A79-CFBFED9A666B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F21C230E-4732-4421-8A79-CFBFED9A666B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F21C230E-4732-4421-8A79-CFBFED9A666B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F21C230E-4732-4421-8A79-CFBFED9A666B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4130A10-85E0-4FC0-983F-AAC1D8B3AA19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4130A10-85E0-4FC0-983F-AAC1D8B3AA19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4130A10-85E0-4FC0-983F-AAC1D8B3AA19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4130A10-85E0-4FC0-983F-AAC1D8B3AA19}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A8605DF-882E-43AE-98B3-AF0F350617A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A8605DF-882E-43AE-98B3-AF0F350617A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A8605DF-882E-43AE-98B3-AF0F350617A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A8605DF-882E-43AE-98B3-AF0F350617A4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

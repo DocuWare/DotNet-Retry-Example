@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>retry_example_error_502_and_504_dot_net8</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DocuWare.Platform.ServerClient.Extensions" Version="12.11.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\retry-example-error-502-and-504-retry-policy-dot-net-standard-2\retry-example-error-502-and-504-retry-policy-dot-net-standard-2.csproj" />
+  </ItemGroup>
+
+</Project>
