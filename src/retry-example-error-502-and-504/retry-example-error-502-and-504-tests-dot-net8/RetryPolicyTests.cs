@@ -34,7 +34,7 @@ namespace retry_example_error_502_and_504_tests
         {
             // Arrange
             var maxRetries = 3;
-            var delay = TimeSpan.FromMilliseconds(200);
+            var delay = TimeSpan.FromMilliseconds(1);
             var retryPolicy = new RetryPolicy();
             var handler = retryPolicy.CreateHttpMessageRetryHandlerWithPolly(maxRetries - 1, delay) as DelegatingHandler;
 
@@ -68,7 +68,7 @@ namespace retry_example_error_502_and_504_tests
         {
             // Arrange
             var maxRetries = 3;
-            var delay = TimeSpan.FromMilliseconds(200);
+            var delay = TimeSpan.FromMilliseconds(1);
             var retryPolicy = new RetryPolicy();
             var handler = retryPolicy.CreateHttpMessageRetryHandlerWithPolly(maxRetries - 1, delay) as DelegatingHandler;
 
@@ -102,7 +102,7 @@ namespace retry_example_error_502_and_504_tests
         {
             // Arrange
             var maxRetries = 3;
-            var delay = TimeSpan.FromMilliseconds(200);
+            var delay = TimeSpan.FromMilliseconds(1);
             var retryPolicy = new RetryPolicy();
             var handler = retryPolicy.CreateHttpMessageRetryHandlerWithPolly(maxRetries - 1, delay) as DelegatingHandler;
 
@@ -135,6 +135,10 @@ namespace retry_example_error_502_and_504_tests
         public async Task CreateHttpMessageRetryHandlerWithPolly_ShouldNotRetryOnNonTransientErrors()
         {
             // Arrange
+            var maxRetries = 3;
+            var delay = TimeSpan.FromMilliseconds(1);
+            var handler = new RetryPolicy.RetryHandlerWithPolly(maxRetries, delay);
+
             var handlerMock = new Mock<HttpMessageHandler>(MockBehavior.Strict);
             handlerMock
                 .Protected()
@@ -145,12 +149,9 @@ namespace retry_example_error_502_and_504_tests
                 .ReturnsAsync(new HttpResponseMessage(HttpStatusCode.OK))
                 .Verifiable();
 
-            var retryHandler = new RetryPolicy.RetryHandlerWithPolly(3, TimeSpan.FromMilliseconds(1))
-            {
-                InnerHandler = handlerMock.Object
-            };
+            handler.InnerHandler = handlerMock.Object;
 
-            var httpClient = new HttpClient(retryHandler);
+            var httpClient = new HttpClient(handler);
 
             // Act
             var response = await httpClient.GetAsync("http://test.com");
@@ -169,7 +170,7 @@ namespace retry_example_error_502_and_504_tests
         {
             // Arrange
             var maxRetries = 3;
-            var delay = TimeSpan.FromMilliseconds(200);
+            var delay = TimeSpan.FromMilliseconds(1);
             var retryPolicy = new RetryPolicy();
             var handler = retryPolicy.CreateHttpMessageRetryHandlerWithPollyAndExponentialBackoff(maxRetries - 1, delay) as DelegatingHandler;
 
@@ -195,7 +196,7 @@ namespace retry_example_error_502_and_504_tests
         {
             // Arrange
             var maxRetries = 3;
-            var delay = TimeSpan.FromMilliseconds(200);
+            var delay = TimeSpan.FromMilliseconds(1);
             var retryPolicy = new RetryPolicy();
             var handler = retryPolicy.CreateHttpMessageRetryHandlerWithPollyAndExponentialBackoff(maxRetries - 1, delay) as DelegatingHandler;
 
@@ -221,7 +222,7 @@ namespace retry_example_error_502_and_504_tests
         {
             // Arrange
             var maxRetries = 3;
-            var delay = TimeSpan.FromMilliseconds(200);
+            var delay = TimeSpan.FromMilliseconds(1);
             var retryPolicy = new RetryPolicy();
             var handler = retryPolicy.CreateHttpMessageRetryHandlerWithPollyAndExponentialBackoff(maxRetries - 1, delay) as DelegatingHandler;
 
@@ -247,7 +248,7 @@ namespace retry_example_error_502_and_504_tests
         {
             // Arrange
             var maxRetries = 3;
-            var delay = TimeSpan.FromMilliseconds(200);
+            var delay = TimeSpan.FromMilliseconds(1);
             var retryPolicy = new RetryPolicy();
             var handler = retryPolicy.CreateHttpMessageRetryHandlerWithPollyAndExponentialBackoff(maxRetries - 1, delay) as DelegatingHandler;
 
@@ -273,7 +274,7 @@ namespace retry_example_error_502_and_504_tests
         {
             // Arrange
             var maxRetries = 3;
-            var delay = TimeSpan.FromMilliseconds(200);
+            var delay = TimeSpan.FromMilliseconds(1);
             var retryPolicy = new RetryPolicy();
             var handler = retryPolicy.CreateHttpMessageRetryHandlerWithPollyAndExponentialBackoff(maxRetries - 1, delay) as DelegatingHandler;
 
@@ -298,6 +299,11 @@ namespace retry_example_error_502_and_504_tests
         public async Task CreateHttpMessageRetryHandlerWithPollyAndExponentialBackoff_ShouldNotRetryOnNonTransientErrors()
         {
             // Arrange
+            var maxRetries = 3;
+            var delay = TimeSpan.FromMilliseconds(1);
+
+            var handler = new RetryPolicy.RetryHandlerWithPollyAndExponentialBackoff(maxRetries, delay);
+
             var handlerMock = new Mock<HttpMessageHandler>(MockBehavior.Strict);
             handlerMock
                 .Protected()
@@ -308,12 +314,9 @@ namespace retry_example_error_502_and_504_tests
                 .ReturnsAsync(new HttpResponseMessage(HttpStatusCode.OK))
                 .Verifiable();
 
-            var retryHandler = new RetryPolicy.RetryHandlerWithPollyAndExponentialBackoff(3, TimeSpan.FromMilliseconds(1))
-            {
-                InnerHandler = handlerMock.Object
-            };
+            handler.InnerHandler = handlerMock.Object;
 
-            var httpClient = new HttpClient(retryHandler);
+            var httpClient = new HttpClient(handler);
 
             // Act
             var response = await httpClient.GetAsync("http://test.com");
@@ -328,9 +331,14 @@ namespace retry_example_error_502_and_504_tests
         }
 
         [Fact]
-        public async Task SendAsync_ShouldRetryOn502()
+        public async Task CreateRetryHandler_ShouldRetryOn502()
         {
             // Arrange
+            var maxRetries = 3;
+            var delay = TimeSpan.FromMilliseconds(1);
+
+            var handler = new RetryPolicy.RetryHandler(maxRetries, delay);
+
             var handlerMock = new Mock<HttpMessageHandler>(MockBehavior.Strict);
             handlerMock
                 .Protected()
@@ -341,12 +349,9 @@ namespace retry_example_error_502_and_504_tests
                 .ReturnsAsync(new HttpResponseMessage(HttpStatusCode.BadGateway))
                 .Verifiable();
 
-            var retryHandler = new RetryPolicy.RetryHandler(3, TimeSpan.FromMilliseconds(1))
-            {
-                InnerHandler = handlerMock.Object
-            };
-
-            var httpClient = new HttpClient(retryHandler);
+            handler.InnerHandler = handlerMock.Object;
+            
+            var httpClient = new HttpClient(handler);
 
             // Act
             var response = await httpClient.GetAsync("http://test.com");
@@ -361,9 +366,14 @@ namespace retry_example_error_502_and_504_tests
         }
 
         [Fact]
-        public async Task SendAsync_ShouldRetryOn503()
+        public async Task CreateRetryHandler_ShouldRetryOn503()
         {
             // Arrange
+            var maxRetries = 3;
+            var delay = TimeSpan.FromMilliseconds(1);
+
+            var handler = new RetryPolicy.RetryHandler(maxRetries, delay);
+
             var handlerMock = new Mock<HttpMessageHandler>(MockBehavior.Strict);
             handlerMock
                 .Protected()
@@ -374,12 +384,9 @@ namespace retry_example_error_502_and_504_tests
                 .ReturnsAsync(new HttpResponseMessage(HttpStatusCode.ServiceUnavailable))
                 .Verifiable();
 
-            var retryHandler = new RetryPolicy.RetryHandler(3, TimeSpan.FromMilliseconds(1))
-            {
-                InnerHandler = handlerMock.Object
-            };
+            handler.InnerHandler = handlerMock.Object;
 
-            var httpClient = new HttpClient(retryHandler);
+            var httpClient = new HttpClient(handler);
 
             // Act
             var response = await httpClient.GetAsync("http://test.com");
@@ -394,9 +401,14 @@ namespace retry_example_error_502_and_504_tests
         }
 
         [Fact]
-        public async Task SendAsync_ShouldRetryOn504()
+        public async Task CreateRetryHandler_ShouldRetryOn504()
         {
             // Arrange
+            var maxRetries = 3;
+            var delay = TimeSpan.FromMilliseconds(1);
+
+            var handler = new RetryPolicy.RetryHandler(maxRetries, delay);
+
             var handlerMock = new Mock<HttpMessageHandler>(MockBehavior.Strict);
             handlerMock
                 .Protected()
@@ -407,12 +419,9 @@ namespace retry_example_error_502_and_504_tests
                 .ReturnsAsync(new HttpResponseMessage(HttpStatusCode.GatewayTimeout))
                 .Verifiable();
 
-            var retryHandler = new RetryPolicy.RetryHandler(3, TimeSpan.FromMilliseconds(1))
-            {
-                InnerHandler = handlerMock.Object
-            };
+            handler.InnerHandler = handlerMock.Object;
 
-            var httpClient = new HttpClient(retryHandler);
+            var httpClient = new HttpClient(handler);
 
             // Act
             var response = await httpClient.GetAsync("http://test.com");
@@ -427,9 +436,14 @@ namespace retry_example_error_502_and_504_tests
         }
 
         [Fact]
-        public async Task SendAsync_ShouldNotRetryOnOtherStatusCodes()
+        public async Task CreateRetryHandler_ShouldNotRetryOnOtherStatusCodes()
         {
             // Arrange
+            var maxRetries = 3;
+            var delay = TimeSpan.FromMilliseconds(1);
+
+            var handler = new RetryPolicy.RetryHandler(maxRetries, delay);
+
             var handlerMock = new Mock<HttpMessageHandler>(MockBehavior.Strict);
             handlerMock
                 .Protected()
@@ -440,12 +454,9 @@ namespace retry_example_error_502_and_504_tests
                 .ReturnsAsync(new HttpResponseMessage(HttpStatusCode.OK))
                 .Verifiable();
 
-            var retryHandler = new RetryPolicy.RetryHandler(3, TimeSpan.FromMilliseconds(1))
-            {
-                InnerHandler = handlerMock.Object
-            };
+            handler.InnerHandler = handlerMock.Object;
 
-            var httpClient = new HttpClient(retryHandler);
+            var httpClient = new HttpClient(handler);
 
             // Act
             var response = await httpClient.GetAsync("http://test.com");
