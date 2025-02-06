@@ -1,13 +1,7 @@
 using Moq;
 using Moq.Protected;
 using retry_example_error_502_and_504_retry_policy_dot_net_standard_2;
-using System;
 using System.Net;
-using System.Net.Http;
-using System.Threading;
-using System.Threading.Tasks;
-using Xunit;
-using static retry_example_error_502_and_504_retry_policy_dot_net_standard_2.RetryPolicy;
 
 namespace retry_example_error_502_and_504_tests
 {
