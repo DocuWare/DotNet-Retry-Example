@@ -17,7 +17,7 @@ namespace retry_example_error_502_and_504_dot_net8
             ServiceConnection connection = ServiceConnection.Create(new Uri(serverUrl), 
                                                                     userName, 
                                                                     userPassword, 
-                                                                    httpClientHandler: retryPolicy.CreateHttpMessageRetryHandler(5, TimeSpan.FromSeconds(1)));
+                                                                    httpClientHandler: retryPolicy.CreateHttpMessageRetryHandlerWithPollyAndExponentialBackoff(5, TimeSpan.FromSeconds(1)));
 
             var org = connection.Organizations.FirstOrDefault();
 
