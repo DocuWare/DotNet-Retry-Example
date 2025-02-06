@@ -3,7 +3,6 @@ using Moq;
 using Moq.Protected;
 using retry_example_error_502_and_504_retry_policy_dot_net_standard_2;
 using System.Net;
-using static retry_example_error_502_and_504_retry_policy_dot_net_standard_2.RetryPolicy;
 
 public class RetryPolicyBenchmark
 {

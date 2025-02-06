@@ -21,7 +21,7 @@ namespace retry_example_error_502_and_504_retry_policy_dot_net_standard_2
         {
             return new RetryHandlerWithPolly(maxRetries, delay);
         }
-
+        
         public HttpMessageHandler CreateHttpMessageRetryHandlerWithPollyAndExponentialBackoff(int maxRetries, TimeSpan delay)
         {
             return new RetryHandlerWithPollyAndExponentialBackoff(maxRetries, delay);
